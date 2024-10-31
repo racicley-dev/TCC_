@@ -7,5 +7,6 @@
 
   - [ ] Colocar o tempo para cada pesquisa (partindo 3 cases)
   - [ ] Entender o shape do embedding!
-  - [ ] Implmentar o código no RSPaper
+  - [ ] Implementar o código no RSPaper
   - [ ] + Incluir outros modelos posteriormente para teste
+  - [ ] Conversar com Gabriel sobre se as buscas estão retornando
