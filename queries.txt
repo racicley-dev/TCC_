@@ -1,0 +1,40 @@
+search
+pediatric AND suspension AND flavor
+pediatric AND suspension AND color
+pediatric AND medicine AND flavor
+pediatric AND medicine AND color
+pediatric AND medicine AND accept
+pediatric AND suspension AND accept
+pediatric AND suspension AND prefer
+pediatric AND suspension AND amoxicillin
+pediatric AND amoxicillin
+pediatric AND amoxicillin AND flavor
+pediatric AND amoxicillin AND color
+pediatric AND amoxicillin AND accept
+pediatric AND amoxicillin AND prefer
+child AND suspension AND flavor
+child AND suspension AND color
+child AND medicine AND flavor
+child AND medicine AND color
+child AND medicine AND accept
+child AND suspension AND accept
+child AND suspension AND prefer
+child AND suspension AND amoxicillin
+child AND amoxicillin
+child AND amoxicillin AND flavor
+child AND amoxicillin AND color
+child AND amoxicillin AND accept
+child AND amoxicillin AND prefer
+kid AND suspension AND flavor
+kid AND suspension AND color
+kid AND medicine AND flavor
+kid AND medicine AND color
+kid AND medicine AND accept
+kid AND suspension AND accept
+kid AND suspension AND prefer
+kid AND suspension AND amoxicillin
+kid AND amoxicillin
+kid AND amoxicillin AND flavor
+kid AND amoxicillin AND color
+kid AND amoxicillin AND accept
+kid AND amoxicillin AND prefer

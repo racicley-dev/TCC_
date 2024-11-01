@@ -1,0 +1,44 @@
+search
+daughter AND suspension AND flavor
+daughter AND suspension AND color
+daughter AND medicine AND flavor
+daughter AND medicine AND color
+daughter AND medicine AND accept
+daughter AND suspension AND accept
+daughter AND suspension AND prefer
+daughter AND suspension AND amoxicillin
+daughter AND amoxicillin
+daughter AND amoxicillin AND flavor
+daughter AND amoxicillin AND color
+daughter AND amoxicillin AND accept
+daughter AND amoxicillin AND prefer
+son AND suspension AND flavor
+son AND suspension AND color
+son AND medicine AND flavor
+son AND medicine AND color
+son AND medicine AND accept
+son AND suspension AND accept
+son AND suspension AND prefer
+son AND suspension AND amoxicillin
+son AND amoxicillin
+son AND amoxicillin AND flavor
+son AND amoxicillin AND color
+son AND amoxicillin AND accept
+son AND amoxicillin AND prefer
+suspension AND flavor AND accept
+suspension AND color AND accept
+suspension AND color AND prefer
+suspension AND flavor AND prefer
+medicine AND flavor AND accept
+medicine AND color AND accept
+medicine AND color AND prefer
+medicine AND flavor AND prefer
+amoxicillin AND suspension
+amoxicillin AND suspension AND flavor
+amoxicillin AND suspension AND color
+amoxicillin AND suspension AND accept
+amoxicillin AND suspension AND prefer
+amoxicillin AND flavor
+amoxicillin AND color
+amoxicillin AND prefer
+amoxicillin AND accept
