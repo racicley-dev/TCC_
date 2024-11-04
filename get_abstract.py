@@ -45,7 +45,7 @@ def get_abs(pmid):
 
 
 def join_dfs(df1, df2):
-    ''' Uni o DF com o ABS com o DF sem ABSTRACT'''
+    ''' Une o DF com o ABS com o DF sem ABSTRACT'''
     n1 = df1.split('.')[0].split('/')[-1] 
     n2 = df2.split('.')[0].split('/')[-1]
     df1 = pd.read_csv(df1)
