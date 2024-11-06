@@ -90,26 +90,23 @@ arquivos = os.listdir(diretorio)
 arquivos_abs = os.listdir(diretorio_com_abs)
 print(f"Arquivos no diretório '{diretorio}':")
 for arquivo in arquivos:
-    try:
-        if arquivo not in arquivos_abs:
-            print("Arquivo atual:", arquivo)
-            df = pd.read_csv(diretorio+arquivo)
+    if arquivo not in arquivos_abs:
+        df = pd.read_csv(diretorio+arquivo)
 
-            for id in range(0,df['PMID'].shape[0]):
-                to_join['PMID'].append(df['PMID'][id])
-                to_join["abstract"].append(get_abs(df['PMID'][id])[0])
+        for id in range(0,df['PMID'].shape[0]):
+            to_join['PMID'].append(df['PMID'][id])
+            to_join["abstract"].append(get_abs(df['PMID'][id])[0])
 
-            df_to_join = pd.DataFrame(to_join)
-            df_to_join.to_csv(diretorio_com_abs+arquivo)
-            join_dfs(diretorio_com_abs+arquivo, diretorio+arquivo)
+        df_to_join = pd.DataFrame(to_join)
+        df_to_join.to_csv(diretorio_com_abs+arquivo)
+        join_dfs(diretorio_com_abs+arquivo, diretorio+arquivo)
 
-            to_join = {
-                'PMID': [],
-                'abstract':[]
-            }
-        else:
-            print('já está no arquivo com abs')
-    except:
-        print('Erro no for')
+        to_join = {
+            'PMID': [],
+            'abstract':[]
+        }
+    else:
+        print('já está no arquivo com abs')
+
 
 join_joined()
