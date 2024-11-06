@@ -20,7 +20,7 @@ embedding_cache = pd.read_pickle(embedding_cache_path)
 
 def setting_up():
     #Nome do arquivo
-    dataset_path = "csv_buscas.csv"
+    dataset_path = "csv_buscas_encoded.csv"
     #Leitura do CSV
     df = pd.read_csv(dataset_path)
     #Filtrando o DataFrame
@@ -109,6 +109,9 @@ def main(df):
     print(pubmed_articles)
 
 if __name__ == "__main__":
-    df = pd.read_csv('csv_buscas.csv')
+    df = pd.read_csv('csv_buscas_encoded.csv',delimiter='\t', on_bad_lines='skip')
+    
+    #print(df)
+
 
     main(df)

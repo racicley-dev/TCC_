@@ -19,7 +19,7 @@ def get_embedding(text: str, model="text-embedding-3-small", **kwargs) -> List[f
     # replace newlines, which can negatively affect performance.
     #text = text.replace("\n", " ")
 
-    #print(text)
+    print(text)
     response = client.embeddings.create(input=[text], model=model, **kwargs)
 
     return response.data[0].embedding
