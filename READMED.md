@@ -6,6 +6,6 @@
   - [x] Escrita da documentação
   - [ ] Colocar o tempo para cada pesquisa (partindo 3 cases)
   - [ ] Entender o shape do embedding!
-  - [ ] Implementar o código no RSPaper
   - [ ] + Incluir outros modelos posteriormente para teste
   - [ ] Conversar com Gabriel sobre se as buscas estão retornando
+  - [ ] Refatorar melhor o código

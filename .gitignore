@@ -1,3 +1,5 @@
 # .gitignore
 .env
 .ipynb_checkpoints
+/__pycache__
+/utils/__pycache__
