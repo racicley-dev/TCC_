@@ -2,7 +2,9 @@
 import pandas as pd
 import pickle
 from time import time
+
 from ControllerOpenAI import ControllerOpenAI
+
 
 class RecomendArticle:
     def __init__(self, dataset_path):
@@ -35,6 +37,31 @@ class RecomendArticle:
                 pickle.dump(self.embedding_cache, cache_file)
 
         return self.embedding_cache[(texto, modelo)]
+    
+    def print_neighbors_by_distance(
+            self,
+            query_string,
+            indices_of_neighbors,
+            k_neighbors,
+            distances
+    ):
+        k_counter = 0
+        for i in indices_of_neighbors:
+            # skip any strings that are identical matches to the starting string
+            if query_string == self.abstract_article_list[i]:
+                continue
+            # stop after printing out k articles
+            if k_counter >= k_neighbors:
+                break
+            k_counter += 1
+
+            # print out the similar strings and their distances
+            print(
+                f"""
+            --- Recomendação #{k_counter} (nearest neighbor {k_counter} of {k_neighbors}) ---
+            String: {self.abstract_article_list[i]}
+            Distance: {distances[i]:0.3f}"""
+            )
 
     def print_recommendations_from_strings(
         self,
@@ -50,11 +77,13 @@ class RecomendArticle:
         # get the embedding of the source string
         query_embedding = embeddings[index_of_source_string]
 
-        # get distances between the source embedding and other embeddings (function from utils.embeddings_utils.py)
+        # get distances between the source embedding and other embeddings (function from ControllerOpenAI.py)
         distances = self.openai_ctr.distances_from_embeddings(query_embedding, embeddings, distance_metric="cosine")
         
         # get indices of nearest neighbors (function from utils.utils.embeddings_utils.py)
         indices_of_nearest_neighbors = self.openai_ctr.indices_of_nearest_neighbors_from_distances(distances)
+
+        indices_of_furtherest_neighbors = self.openai_ctr.indices_of_furtherest_neighbors_from_distances(distances)
 
         # print out source string
         query_string = self.abstract_article_list[index_of_source_string]
@@ -77,8 +106,11 @@ class RecomendArticle:
             String: {self.abstract_article_list[i]}
             Distance: {distances[i]:0.3f}"""
             )
-
+            
         return indices_of_nearest_neighbors
+    
+        ### METHOD TEST 
+        # RecomendArticle.print_neighbors_by_distance(query_string, indices_of_furtherest_neighbors, k_nearest_neighbors, distances)
 
 if __name__ == "__main__":
     ra = RecomendArticle('csv_buscas_encoded.csv')

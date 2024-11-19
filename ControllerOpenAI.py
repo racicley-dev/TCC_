@@ -155,6 +155,10 @@ class ControllerOpenAI:
     def indices_of_nearest_neighbors_from_distances(distances) -> np.ndarray:
         """Return a list of indices of nearest neighbors from a list of distances."""
         return np.argsort(distances)
+    
+    def indices_of_furtherest_neighbors_from_distances(distances) -> np.ndarray:
+        """List of furtherest neighbors from a list of distances """
+        return np.argsort(distances)[::-1]
 
     def pca_components_from_embeddings(
         self,
