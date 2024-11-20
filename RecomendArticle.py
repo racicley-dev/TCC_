@@ -2,6 +2,8 @@
 import pandas as pd
 import pickle
 from time import time
+#import numpy as np
+
 
 from ControllerOpenAI import ControllerOpenAI
 
@@ -67,11 +69,11 @@ class RecomendArticle:
             )
 
     def print_recommendations_from_strings(
-        self,
-        index_of_source_string: int,
-        k_nearest_neighbors: int = 1,
-        model="text-embedding-3-small",
-    ) -> list[int]:
+            self,
+            index_of_source_string: int,
+            k_nearest_neighbors: int = 1,
+            model="text-embedding-3-small",
+            ) -> list[int]:
 
         """Print out the k nearest neighbors of a given string."""
         # get embeddings for all strings
@@ -82,11 +84,12 @@ class RecomendArticle:
 
         # get distances between the source embedding and other embeddings (function from ControllerOpenAI.py)
         distances = self.openai_ctr.distances_from_embeddings(query_embedding, embeddings, distance_metric="cosine")
-        
+        #print(type(distances))
         # get indices of nearest neighbors (function from utils.utils.embeddings_utils.py)
         indices_of_nearest_neighbors = self.openai_ctr.indices_of_nearest_neighbors_from_distances(distances)
-
+        #indices_of_nearest_neighbors =  np.argsort(distances)
         indices_of_furtherest_neighbors = self.openai_ctr.indices_of_furtherest_neighbors_from_distances(distances)
+        #indices_of_furtherest_neighbors = np.argsort(distances)[::-1]
 
         # print out source string
         query_string = self.abstract_article_list[index_of_source_string]
@@ -107,11 +110,17 @@ class RecomendArticle:
                 f"""
             --- Recomendação #{k_counter} (nearest neighbor {k_counter} of {k_nearest_neighbors}) ---
             String: {self.abstract_article_list[i]}
-            Distance: {distances[i]:0.3f}"""
+            Distance: {distances[i]:0.3f}
+            DOI:{self.doi_article_list[i]}
+"""
             )
             
-        return indices_of_nearest_neighbors
+        return (indices_of_nearest_neighbors, indices_of_furtherest_neighbors)
     
         ### METHOD TEST 
         # RecomendArticle.print_neighbors_by_distance(query_string, indices_of_furtherest_neighbors, k_nearest_neighbors, distances)
 
+if __name__ == "__main__":
+    ra = RecomendArticle('csv_buscas_unificado_ajustado_final.csv')
+    articles = ra.print_recommendations_from_strings(0, 5)
+    print(articles)
