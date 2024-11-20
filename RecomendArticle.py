@@ -119,8 +119,3 @@ class RecomendArticle:
     
         ### METHOD TEST 
         # RecomendArticle.print_neighbors_by_distance(query_string, indices_of_furtherest_neighbors, k_nearest_neighbors, distances)
-
-if __name__ == "__main__":
-    ra = RecomendArticle('csv_buscas_unificado_ajustado_final.csv')
-    articles = ra.print_recommendations_from_strings(0, 5)
-    print(articles)
