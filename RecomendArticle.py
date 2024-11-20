@@ -13,9 +13,11 @@ class RecomendArticle:
         #Archive base name
         #dataset_path = dataset_path
         #Load CSV
-        df = pd.read_csv(dataset_path, delimiter='\t',)
-        #filtering DF
+        df = pd.read_csv(dataset_path)
+        #Load abstract as a list from df
         self.abstract_article_list = df['ABSTRACT'].tolist()
+        #Load DOIs as a list from df
+        self.doi_article_list = df['DOI'].tolist()
         # set path to embedding cache
         self.embedding_cache_path = dataset_path.split('.')[0]+'.pkl'
         # load the cache if it exists, and save a copy to disk
@@ -58,9 +60,10 @@ class RecomendArticle:
             # print out the similar strings and their distances
             print(
                 f"""
-            --- Recomendação #{k_counter} (nearest neighbor {k_counter} of {k_neighbors}) ---
+            --- Recomendation #{k_counter} (nearest neighbor {k_counter} of {k_neighbors}) ---
             String: {self.abstract_article_list[i]}
-            Distance: {distances[i]:0.3f}"""
+            Distance: {distances[i]:0.3f}
+            DOI: {self.doi_article_list[i]}"""
             )
 
     def print_recommendations_from_strings(
@@ -113,6 +116,6 @@ class RecomendArticle:
         # RecomendArticle.print_neighbors_by_distance(query_string, indices_of_furtherest_neighbors, k_nearest_neighbors, distances)
 
 if __name__ == "__main__":
-    ra = RecomendArticle('csv_buscas_encoded.csv')
+    ra = RecomendArticle('csv_buscas_unificado_ajustado_final.csv')
     articles = ra.print_recommendations_from_strings(0, 5)
     print(articles)
