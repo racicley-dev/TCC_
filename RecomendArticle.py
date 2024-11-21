@@ -49,7 +49,9 @@ class RecomendArticle:
             k_neighbors,
             distances
     ):
+        
         k_counter = 0
+        article_return = []
         for i in indices_of_neighbors:
             # skip any strings that are identical matches to the starting string
             if query_string == self.abstract_article_list[i]:
@@ -59,14 +61,15 @@ class RecomendArticle:
                 break
             k_counter += 1
 
-            # print out the similar strings and their distances
-            print(
-                f"""
-            --- Recomendation #{k_counter} (nearest neighbor {k_counter} of {k_neighbors}) ---
-            String: {self.abstract_article_list[i]}
-            Distance: {distances[i]:0.3f}
-            DOI: {self.doi_article_list[i]}"""
+            article_return.append(
+                {
+                    'prioridade_artigo': k_counter,
+                    'abstract': self.abstract_article_list[i],
+                    'distance': distances[i],
+                    'doi': self.doi_article_list[i]
+                }
             )
+        return article_return
 
     def print_recommendations_from_strings(
             self,
@@ -93,29 +96,8 @@ class RecomendArticle:
 
         # print out source string
         query_string = self.abstract_article_list[index_of_source_string]
-        print(f"Source string: {query_string}")
-        # print out its k nearest neighbors
-        k_counter = 0
-        for i in indices_of_nearest_neighbors:
-            # skip any strings that are identical matches to the starting string
-            if query_string == self.abstract_article_list[i]:
-                continue
-            # stop after printing out k articles
-            if k_counter >= k_nearest_neighbors:
-                break
-            k_counter += 1
-
-            # print out the similar strings and their distances
-            print(
-                f"""
-            --- Recomendação #{k_counter} (nearest neighbor {k_counter} of {k_nearest_neighbors}) ---
-            String: {self.abstract_article_list[i]}
-            Distance: {distances[i]:0.3f}
-            DOI:{self.doi_article_list[i]}
-"""
-            )
+        #print(f"Source string: {query_string}")
+        
+        articles = self.print_neighbors_by_distance(distances=distances,indices_of_neighbors=indices_of_nearest_neighbors,k_neighbors=k_nearest_neighbors, query_string=query_string)
             
-        return (indices_of_nearest_neighbors, indices_of_furtherest_neighbors)
-    
-        ### METHOD TEST 
-        # RecomendArticle.print_neighbors_by_distance(query_string, indices_of_furtherest_neighbors, k_nearest_neighbors, distances)
+        return (query_string, articles, indices_of_nearest_neighbors, indices_of_furtherest_neighbors)
