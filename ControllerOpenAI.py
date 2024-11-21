@@ -25,9 +25,7 @@ class ControllerOpenAI:
 
         return response.data[0].embedding
 
-    async def aget_embedding(self,
-        text: str, model="text-embedding-3-small", **kwargs
-    ) -> List[float]:
+    async def aget_embedding(self, text: str, model="text-embedding-3-small", **kwargs) -> List[float]:
         # replace newlines, which can negatively affect performance.
         text = text.replace("\n", " ")
 
@@ -35,9 +33,7 @@ class ControllerOpenAI:
             "data"
         ][0]["embedding"]
 
-    def get_embeddings(self,
-        list_of_text: List[str], model="text-embedding-3-small", **kwargs
-    ) -> List[List[float]]:
+    def get_embeddings(self, list_of_text: List[str], model="text-embedding-3-small", **kwargs) -> List[List[float]]:
         assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
         # replace newlines, which can negatively affect performance.
@@ -46,10 +42,7 @@ class ControllerOpenAI:
         data = self.client.embeddings.create(input=list_of_text, model=model, **kwargs).data
         return [d.embedding for d in data]
 
-    async def aget_embeddings(
-        self,
-        list_of_text: List[str], model="text-embedding-3-small", **kwargs
-    ) -> List[List[float]]:
+    async def aget_embeddings(self, list_of_text: List[str], model="text-embedding-3-small", **kwargs) -> List[List[float]]:
         assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
         # replace newlines, which can negatively affect performance.
@@ -63,10 +56,7 @@ class ControllerOpenAI:
     def cosine_similarity(a, b):
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
-    def plot_multiclass_precision_recall(
-        self,
-        y_score, y_true_untransformed, class_list, classifier_name
-    ):
+    def plot_multiclass_precision_recall(self, y_score, y_true_untransformed, class_list, classifier_name):
         """
         Precision-Recall plotting for a multiclass problem. It plots average precision-recall, per class precision recall and reference f1 contours.
 
@@ -133,12 +123,7 @@ class ControllerOpenAI:
         plt.title(f"{classifier_name}: Precision-Recall curve for each class")
         plt.legend(lines, labels)
 
-    def distances_from_embeddings(
-        self,
-        query_embedding: List[float],
-        embeddings: List[List[float]],
-        distance_metric="cosine",
-    ) -> List[List]:
+    def distances_from_embeddings(self, query_embedding: List[float], embeddings: List[List[float]], distance_metric="cosine") -> List[List]:
         """Return the distances between a query embedding and a list of embeddings."""
         distance_metrics = {
             "cosine": spatial.distance.cosine,
@@ -160,19 +145,13 @@ class ControllerOpenAI:
         """List of furtherest neighbors from a list of distances """
         return np.argsort(distances)[::-1]
 
-    def pca_components_from_embeddings(
-        self,
-        embeddings: List[List[float]], n_components=2
-    ) -> np.ndarray:
+    def pca_components_from_embeddings(self, embeddings: List[List[float]], n_components=2) -> np.ndarray:
         """Return the PCA components of a list of embeddings."""
         pca = PCA(n_components=n_components)
         array_of_embeddings = np.array(embeddings)
         return pca.fit_transform(array_of_embeddings)
 
-    def tsne_components_from_embeddings(
-        self,
-        embeddings: List[List[float]], n_components=2, **kwargs
-    ) -> np.ndarray:
+    def tsne_components_from_embeddings(self, embeddings: List[List[float]], n_components=2, **kwargs) -> np.ndarray:
         """Returns t-SNE components of a list of embeddings."""
         # use better defaults if not specified
         if "init" not in kwargs.keys():
@@ -183,16 +162,7 @@ class ControllerOpenAI:
         array_of_embeddings = np.array(embeddings)
         return tsne.fit_transform(array_of_embeddings)
 
-    def chart_from_components(
-        self,
-        components: np.ndarray,
-        labels: Optional[List[str]] = None,
-        strings: Optional[List[str]] = None,
-        x_title="Component 0",
-        y_title="Component 1",
-        mark_size=5,
-        **kwargs,
-    ):
+    def chart_from_components(self, components: np.ndarray, labels: Optional[List[str]] = None, strings: Optional[List[str]] = None,x_title="Component 0",y_title="Component 1",mark_size=5,**kwargs,):
         """Return an interactive 2D chart of embedding components."""
         empty_list = ["" for _ in components]
         data = pd.DataFrame(
