@@ -87,7 +87,7 @@ class RecomendArticle:
         #Get distances between the source embedding and other embeddings (function from ControllerOpenAI.py)
         distances = self.openai_ctr.distances_from_embeddings(query_embedding, embeddings, distance_metric="cosine")
 
-        #Get indices of nearest neighbors (function from utils.utils.embeddings_utils.py)
+        #Get indices of nearest neighbors (function from from ControllerOpenAI.py)
         indices_of_nearest_neighbors = self.openai_ctr.indices_of_nearest_neighbors_from_distances(distances)
 
         indices_of_furtherest_neighbors = self.openai_ctr.indices_of_furtherest_neighbors_from_distances(distances)
