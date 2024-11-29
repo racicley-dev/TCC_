@@ -97,4 +97,4 @@ class RecomendArticle:
         
         articles = self.print_neighbors_by_distance(distances=distances,indices_of_neighbors=indices_of_nearest_neighbors,k_neighbors=k_nearest_neighbors, query_string=query_string)
             
-        return (query_string, articles, indices_of_nearest_neighbors, indices_of_furtherest_neighbors)
+        return (query_string, articles, indices_of_nearest_neighbors, indices_of_furtherest_neighbors, embeddings)
