@@ -71,6 +71,7 @@ class RecomendArticle:
     def print_recommendations_from_strings(
             self,
             k_nearest_neighbors: int = 1,
+            distance="cosine",
             model="text-embedding-3-small",
             ) -> list[int]:
 
@@ -85,7 +86,7 @@ class RecomendArticle:
         query_embedding = embeddings[index_of_source_string]
 
         #Get distances between the source embedding and other embeddings (function from ControllerOpenAI.py)
-        distances = self.openai_ctr.distances_from_embeddings(query_embedding, embeddings, distance_metric="cosine")
+        distances = self.openai_ctr.distances_from_embeddings(query_embedding, embeddings, distance_metric=distance)
 
         #Get indices of nearest neighbors (function from from ControllerOpenAI.py)
         indices_of_nearest_neighbors = self.openai_ctr.indices_of_nearest_neighbors_from_distances(distances)

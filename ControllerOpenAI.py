@@ -162,7 +162,7 @@ class ControllerOpenAI:
         array_of_embeddings = np.array(embeddings)
         return tsne.fit_transform(array_of_embeddings)
 
-    def chart_from_components(self, components: np.ndarray, labels: Optional[List[str]] = None, strings: Optional[List[str]] = None,x_title="Component 0",y_title="Component 1",mark_size=5,**kwargs,):
+    def chart_from_components(self, textss, components: np.ndarray, labels: Optional[List[str]] = None, strings: Optional[List[str]] = None,x_title="Component 0",y_title="Component 1",mark_size=5,**kwargs,):
         """Return an interactive 2D chart of embedding components."""
         empty_list = ["" for _ in components]
         data = pd.DataFrame(
@@ -182,7 +182,9 @@ class ControllerOpenAI:
             color="label" if labels else None,
             symbol="label" if labels else None,
             hover_data=["string"] if strings else None,
+            text=textss,
             **kwargs,
         ).update_traces(marker=dict(size=mark_size))
+        chart.update_traces(textposition='top center')
         return chart
 
